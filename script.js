@@ -32,10 +32,60 @@ const displayOptions = () => {
     }
     optionContainer.appendChild(buttonCon);
 };
+
+//block all the buttons 
+const blocker = () => {
+    let optionsButtons = document.querySelectorAll(".options");
+    let letterButtons = document.querySelectorAll(".letters");
+    //disable all options
+    optionsButtons.forEach((button) => {
+        button.disabled = true;
+    });
+    //disable all letters
+    letterButtons.forEach((button) => {
+        button.disabled.true;
+    });
+    newGameContainer.classList.remove("hide");
+};
+//word generator
+const generateWord = (optionValue) => {
+    let optionsButtons = document.querySelectorAll(".options");
+    //if optionvalue matches the button innerText then highlight the button
+    optionsButtons.forEach((button) => {
+        if(button.innerText.toLowerCase() === 
+        optionValue){
+            button.classList.add("active");
+        }
+        button.disabled = true;
+    });
+
+    //initially hide letters, clear previous word
+    letterContainer.classList.remove("hide");
+    userInputSection.innerText = ""; 
+
+    let optionArray = options[optionValue];
+    //choose random word
+    chosenWord = optionArray[Math.floor(Math.random () * optionArray.length)];
+    chosenWord = chosenWord.toUpperCase();
+    console.log(chosenWord);
+};
+
+
+
+
 //init function (called when page loads/user presses new game)
 const initializer = () => {
     winCount = 0;
     count = 0;
+
+//for creating letter buttons
+for (let i = 65; i < 91; i++) {
+    let button = document.createElement("button");
+    button.classList.add("letters");
+    //number to ASCII[A-Z]
+    button.innerText = String.fromCharCode(i);
+    letterContainer.append(button);
+}    
     displayOptions();
 };
 //New Game
